@@ -1,0 +1,67 @@
+{
+  "description": "Mandate Protocol draft 0.1 test vector. Keys are derived from fixed seeds and MUST NOT be used for anything else.",
+  "keys": {
+    "issuer": {
+      "seed_hex": "0101010101010101010101010101010101010101010101010101010101010101",
+      "kid": "UDDReOZl1ipXAfp9wYsm13sDBMK5og--QWdBjzuf6o4",
+      "public_jwk": {
+        "kty": "OKP",
+        "crv": "Ed25519",
+        "x": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w"
+      }
+    },
+    "agent": {
+      "seed_hex": "0202020202020202020202020202020202020202020202020202020202020202",
+      "kid": "aVBtapLd11SUVKIMGJfPzOEDuN0sXcmzJQNVT-_sKEU",
+      "public_jwk": {
+        "kty": "OKP",
+        "crv": "Ed25519",
+        "x": "gTl3Dqh9F19Wo1Rmw0x-zMuNipG07jeiXfYPW4_Js5Q"
+      }
+    }
+  },
+  "mandate": {
+    "token": "eyJhbGciOiJFZERTQSIsInR5cCI6Im1hbmRhdGUrandzIiwia2lkIjoiVUREUmVPWmwxaXBYQWZwOXdZc20xM3NEQk1LNW9nLS1RV2RCanp1ZjZvNCJ9.eyJ2IjoiMC4xIiwibWlkIjoibWR0X0FBQUFBQUFBQUFBQUFBQUFBQUFBQUEiLCJpc3MiOiJVRERSZU9abDFpcFhBZnA5d1lzbTEzc0RCTUs1b2ctLVFXZEJqenVmNm80Iiwic3ViIjoiYWNjdF84MzQxQGV4YW1wbGUtYnJva2VyIiwiYWdlbnQiOiJhVkJ0YXBMZDExU1VWS0lNR0pmUHpPRUR1TjBzWGNtekpRTlZULV9zS0VVIiwiYXVkIjpbImJyb2tlci5leGFtcGxlIl0sImlhdCI6MTc2MzMwMDAwMCwiZXhwIjoxNzY1ODkyMDAwLCJwb2xpY3kiOnsiaW5zdHJ1bWVudHMiOlsidXNfZXF1aXR5IiwiZXRmIl0sInN5bWJvbHMiOnsiZGVueSI6WyJHTUUiXX0sIm1heF9vcmRlcl9ub3Rpb25hbCI6MjUwMDAsInJlcXVpcmVfYXBwcm92YWwiOnsiYWJvdmVfbm90aW9uYWwiOjEwMDAwfSwiZXhpdHMiOiJhbHdheXNfYWxsb3ciLCJjdXJyZW5jeSI6IlVTRCJ9fQ.NVn1_3_xFFHDM1S4BIf6JAm__xHdSe8xmWA-JlnmfmR15EYktodKMZh6QUlLbnH5cECFyiCCtGZ-eJFU1DnlAQ",
+    "policy": {
+      "instruments": [
+        "us_equity",
+        "etf"
+      ],
+      "symbols": {
+        "deny": [
+          "GME"
+        ]
+      },
+      "max_order_notional": 25000,
+      "require_approval": {
+        "above_notional": 10000
+      },
+      "exits": "always_allow",
+      "currency": "USD"
+    }
+  },
+  "request": {
+    "method": "POST",
+    "url": "https://broker.example/v2/orders",
+    "body": "{\"symbol\":\"MSFT\",\"qty\":\"10\",\"side\":\"buy\",\"type\":\"market\",\"time_in_force\":\"day\"}",
+    "verify_at": 1763300110,
+    "verifier_id": "broker.example"
+  },
+  "signature_base": "\"@method\": POST\n\"@target-uri\": https://broker.example/v2/orders\n\"content-digest\": sha-256=:yV+ij4ZFWnQPIYboGo2rPaFtnAzKTPGa0FnEZTJf6ic=:\n\"mandate\": eyJhbGciOiJFZERTQSIsInR5cCI6Im1hbmRhdGUrandzIiwia2lkIjoiVUREUmVPWmwxaXBYQWZwOXdZc20xM3NEQk1LNW9nLS1RV2RCanp1ZjZvNCJ9.eyJ2IjoiMC4xIiwibWlkIjoibWR0X0FBQUFBQUFBQUFBQUFBQUFBQUFBQUEiLCJpc3MiOiJVRERSZU9abDFpcFhBZnA5d1lzbTEzc0RCTUs1b2ctLVFXZEJqenVmNm80Iiwic3ViIjoiYWNjdF84MzQxQGV4YW1wbGUtYnJva2VyIiwiYWdlbnQiOiJhVkJ0YXBMZDExU1VWS0lNR0pmUHpPRUR1TjBzWGNtekpRTlZULV9zS0VVIiwiYXVkIjpbImJyb2tlci5leGFtcGxlIl0sImlhdCI6MTc2MzMwMDAwMCwiZXhwIjoxNzY1ODkyMDAwLCJwb2xpY3kiOnsiaW5zdHJ1bWVudHMiOlsidXNfZXF1aXR5IiwiZXRmIl0sInN5bWJvbHMiOnsiZGVueSI6WyJHTUUiXX0sIm1heF9vcmRlcl9ub3Rpb25hbCI6MjUwMDAsInJlcXVpcmVfYXBwcm92YWwiOnsiYWJvdmVfbm90aW9uYWwiOjEwMDAwfSwiZXhpdHMiOiJhbHdheXNfYWxsb3ciLCJjdXJyZW5jeSI6IlVTRCJ9fQ.NVn1_3_xFFHDM1S4BIf6JAm__xHdSe8xmWA-JlnmfmR15EYktodKMZh6QUlLbnH5cECFyiCCtGZ-eJFU1DnlAQ\n\"@signature-params\": (\"@method\" \"@target-uri\" \"content-digest\" \"mandate\");created=1763300100;expires=1763300160;keyid=\"aVBtapLd11SUVKIMGJfPzOEDuN0sXcmzJQNVT-_sKEU\";alg=\"ed25519\";nonce=\"bm9uY2Utdi0wLjEtdGVzdA\";tag=\"mandate/0.1\"",
+  "headers": {
+    "Mandate": "eyJhbGciOiJFZERTQSIsInR5cCI6Im1hbmRhdGUrandzIiwia2lkIjoiVUREUmVPWmwxaXBYQWZwOXdZc20xM3NEQk1LNW9nLS1RV2RCanp1ZjZvNCJ9.eyJ2IjoiMC4xIiwibWlkIjoibWR0X0FBQUFBQUFBQUFBQUFBQUFBQUFBQUEiLCJpc3MiOiJVRERSZU9abDFpcFhBZnA5d1lzbTEzc0RCTUs1b2ctLVFXZEJqenVmNm80Iiwic3ViIjoiYWNjdF84MzQxQGV4YW1wbGUtYnJva2VyIiwiYWdlbnQiOiJhVkJ0YXBMZDExU1VWS0lNR0pmUHpPRUR1TjBzWGNtekpRTlZULV9zS0VVIiwiYXVkIjpbImJyb2tlci5leGFtcGxlIl0sImlhdCI6MTc2MzMwMDAwMCwiZXhwIjoxNzY1ODkyMDAwLCJwb2xpY3kiOnsiaW5zdHJ1bWVudHMiOlsidXNfZXF1aXR5IiwiZXRmIl0sInN5bWJvbHMiOnsiZGVueSI6WyJHTUUiXX0sIm1heF9vcmRlcl9ub3Rpb25hbCI6MjUwMDAsInJlcXVpcmVfYXBwcm92YWwiOnsiYWJvdmVfbm90aW9uYWwiOjEwMDAwfSwiZXhpdHMiOiJhbHdheXNfYWxsb3ciLCJjdXJyZW5jeSI6IlVTRCJ9fQ.NVn1_3_xFFHDM1S4BIf6JAm__xHdSe8xmWA-JlnmfmR15EYktodKMZh6QUlLbnH5cECFyiCCtGZ-eJFU1DnlAQ",
+    "Signature-Input": "mandate=(\"@method\" \"@target-uri\" \"content-digest\" \"mandate\");created=1763300100;expires=1763300160;keyid=\"aVBtapLd11SUVKIMGJfPzOEDuN0sXcmzJQNVT-_sKEU\";alg=\"ed25519\";nonce=\"bm9uY2Utdi0wLjEtdGVzdA\";tag=\"mandate/0.1\"",
+    "Signature": "mandate=:NDS0KogTgKKwhi1+Szc3RrOx1WCwDzkstEgaToId3m2ZyZC96XzR38F5D3n/tw75dvDhbbBoRWFLVp5aZFRICQ==:",
+    "Content-Digest": "sha-256=:yV+ij4ZFWnQPIYboGo2rPaFtnAzKTPGa0FnEZTJf6ic=:"
+  },
+  "expected": {
+    "decision": "allow",
+    "account": {
+      "equity": 100000,
+      "positions": {},
+      "prices": {
+        "MSFT": 400
+      }
+    }
+  }
+}

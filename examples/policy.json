@@ -1,0 +1,13 @@
+{
+  "instruments": ["us_equity", "etf"],
+  "symbols": { "deny": ["GME", "AMC"] },
+  "allow_short": false,
+  "order_types": ["market", "limit"],
+  "max_order_notional": 25000,
+  "max_daily_notional": 100000,
+  "max_position_pct": 5,
+  "max_orders_per_minute": 30,
+  "require_approval": { "above_notional": 10000 },
+  "exits": "always_allow",
+  "currency": "USD"
+}

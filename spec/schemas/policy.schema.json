@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shamazkhan/mandate/blob/main/spec/schemas/policy.schema.json",
+  "title": "Mandate policy (draft 0.1)",
+  "type": "object",
+  "properties": {
+    "instruments": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "us_equity",
+          "etf",
+          "option",
+          "crypto",
+          "fx",
+          "future",
+          "bond",
+          "fund"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "symbols": {
+      "type": "object",
+      "properties": {
+        "allow": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deny": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "sides": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "buy",
+          "sell"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "allow_short": {
+      "type": "boolean",
+      "default": false
+    },
+    "order_types": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "market",
+          "limit",
+          "stop",
+          "stop_limit",
+          "trailing_stop"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "max_order_notional": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "max_daily_notional": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "max_position_pct": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 100
+    },
+    "max_leverage": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "max_orders_per_minute": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "require_approval": {
+      "type": "object",
+      "properties": {
+        "above_notional": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "exits": {
+      "enum": [
+        "always_allow",
+        "evaluate"
+      ],
+      "default": "always_allow"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "default": "USD"
+    }
+  },
+  "additionalProperties": true
+}

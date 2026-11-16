@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.test/
+*.key.json
+registry.json
+evidence.jsonl
+*.tgz
+.DS_Store

@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shamazkhan/mandate/blob/main/spec/schemas/evidence-entry.schema.json",
+  "title": "Evidence log entry (draft 0.1)",
+  "type": "object",
+  "required": [
+    "v",
+    "seq",
+    "ts",
+    "prev",
+    "decision",
+    "reasons",
+    "request",
+    "verifier",
+    "hash"
+  ],
+  "properties": {
+    "v": {
+      "const": "0.1"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "ts": {
+      "type": "integer"
+    },
+    "prev": {
+      "type": "string"
+    },
+    "decision": {
+      "enum": [
+        "allow",
+        "deny",
+        "hold"
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "agent": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$",
+      "description": "RFC 7638 JWK thumbprint (SHA-256, base64url)"
+    },
+    "assurance": {
+      "enum": [
+        "basic",
+        "verified",
+        "preflight"
+      ]
+    },
+    "operator": {
+      "type": "string"
+    },
+    "mandate": {
+      "type": "string"
+    },
+    "sub": {
+      "type": "string"
+    },
+    "issuer": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$",
+      "description": "RFC 7638 JWK thumbprint (SHA-256, base64url)"
+    },
+    "order": {
+      "$ref": "order.schema.json"
+    },
+    "request": {
+      "type": "object",
+      "required": [
+        "method",
+        "target"
+      ],
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "content_digest": {
+          "type": "string"
+        }
+      }
+    },
+    "verifier": {
+      "type": "string"
+    },
+    "hash": {
+      "type": "string"
+    },
+    "sig": {
+      "type": "string"
+    }
+  }
+}

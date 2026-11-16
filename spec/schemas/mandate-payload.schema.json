@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shamazkhan/mandate/blob/main/spec/schemas/mandate-payload.schema.json",
+  "title": "Mandate token payload (draft 0.1)",
+  "type": "object",
+  "required": [
+    "v",
+    "mid",
+    "iss",
+    "sub",
+    "agent",
+    "iat",
+    "exp",
+    "policy"
+  ],
+  "properties": {
+    "v": {
+      "const": "0.1"
+    },
+    "mid": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{16,128}$"
+    },
+    "iss": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$",
+      "description": "RFC 7638 JWK thumbprint (SHA-256, base64url)"
+    },
+    "sub": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$",
+      "description": "RFC 7638 JWK thumbprint (SHA-256, base64url)"
+    },
+    "aud": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "iat": {
+      "type": "integer"
+    },
+    "nbf": {
+      "type": "integer"
+    },
+    "exp": {
+      "type": "integer"
+    },
+    "policy": {
+      "$ref": "policy.schema.json"
+    }
+  },
+  "additionalProperties": false
+}

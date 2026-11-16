@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shamazkhan/mandate/blob/main/spec/schemas/order.schema.json",
+  "title": "Normalised order (draft 0.1)",
+  "type": "object",
+  "required": [
+    "symbol",
+    "side",
+    "type",
+    "asset_class"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "qty"
+      ]
+    },
+    {
+      "required": [
+        "notional"
+      ]
+    }
+  ],
+  "properties": {
+    "symbol": {
+      "type": "string"
+    },
+    "side": {
+      "enum": [
+        "buy",
+        "sell"
+      ]
+    },
+    "qty": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "notional": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "type": {
+      "enum": [
+        "market",
+        "limit",
+        "stop",
+        "stop_limit",
+        "trailing_stop"
+      ]
+    },
+    "limit_price": {
+      "type": "number"
+    },
+    "stop_price": {
+      "type": "number"
+    },
+    "asset_class": {
+      "enum": [
+        "us_equity",
+        "etf",
+        "option",
+        "crypto",
+        "fx",
+        "future",
+        "bond",
+        "fund"
+      ]
+    },
+    "time_in_force": {
+      "type": "string"
+    },
+    "client_order_id": {
+      "type": "string"
+    }
+  }
+}

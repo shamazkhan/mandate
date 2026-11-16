@@ -1,0 +1,40 @@
+{
+  "name": "mandate-protocol",
+  "version": "1.0.0",
+  "description": "Signed orders for AI trading agents. Agents sign every order with their identity and the account holder's mandate; brokers verify for free. Reference implementation of Mandate Protocol draft 0.1.",
+  "license": "Apache-2.0",
+  "author": "Shamaz Khan",
+  "homepage": "https://github.com/shamazkhan/mandate#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/shamazkhan/mandate.git" },
+  "bugs": { "url": "https://github.com/shamazkhan/mandate/issues" },
+  "keywords": ["ai-agents", "trading", "agentic-trading", "mcp", "http-message-signatures", "rfc9421", "ed25519", "broker", "alpaca", "agent-identity", "know-your-agent", "authorization", "fintech", "security"],
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "bin": { "mandate": "dist/cli/index.js" },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+    "./agent": { "types": "./dist/agent/index.d.ts", "default": "./dist/agent/index.js" },
+    "./verifier": { "types": "./dist/verifier/exports.d.ts", "default": "./dist/verifier/exports.js" },
+    "./registry": { "types": "./dist/registry/index.d.ts", "default": "./dist/registry/index.js" },
+    "./proxy": { "types": "./dist/proxy/index.d.ts", "default": "./dist/proxy/index.js" },
+    "./adapters": { "types": "./dist/adapters/index.d.ts", "default": "./dist/adapters/index.js" },
+    "./evidence": { "types": "./dist/evidence/index.d.ts", "default": "./dist/evidence/index.js" },
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "spec", "README.md", "LICENSE", "NOTICE", "CHANGELOG.md"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && chmod +x dist/cli/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "rm -rf .test && tsc -p tsconfig.json && node --test .test/test/*.test.js",
+    "vectors": "npm run build && node scripts/vectors.mjs",
+    "demo": "npm run build && node dist/cli/index.js demo",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.6.0"
+  }
+}

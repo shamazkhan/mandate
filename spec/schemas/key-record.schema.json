@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shamazkhan/mandate/blob/main/spec/schemas/key-record.schema.json",
+  "title": "Registry key record (draft 0.1)",
+  "type": "object",
+  "required": [
+    "kid",
+    "type",
+    "jwk",
+    "status",
+    "assurance",
+    "created_at"
+  ],
+  "properties": {
+    "kid": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$",
+      "description": "RFC 7638 JWK thumbprint (SHA-256, base64url)"
+    },
+    "type": {
+      "enum": [
+        "agent",
+        "issuer",
+        "verifier"
+      ]
+    },
+    "jwk": {
+      "type": "object",
+      "required": [
+        "kty",
+        "crv",
+        "x"
+      ],
+      "properties": {
+        "kty": {
+          "const": "OKP"
+        },
+        "crv": {
+          "const": "Ed25519"
+        },
+        "x": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{43}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "operator": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "active",
+        "revoked"
+      ]
+    },
+    "assurance": {
+      "enum": [
+        "basic",
+        "verified",
+        "preflight"
+      ]
+    },
+    "created_at": {
+      "type": "integer"
+    },
+    "revoked_at": {
+      "type": "integer"
+    },
+    "preflight": {
+      "type": "object",
+      "required": [
+        "report_url",
+        "agent_version",
+        "expires_at"
+      ],
+      "properties": {
+        "report_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "agent_version": {
+          "type": "string"
+        },
+        "expires_at": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
